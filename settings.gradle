@@ -1,0 +1,3 @@
+include ':tabbottom-kit'
+include ':app'
+rootProject.name = "TabBottomKit"

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TabBottomKit</string>
+
+    <string name="if_home">&#xe8c6;</string>
+    <string name="if_recommend">&#xe63f;</string>
+    <string name="if_chat">&#xe63c;</string>
+    <string name="if_profile">&#xe634;</string>
+    <string name="if_category">&#xe600;</string>
+    <string name="if_favorite">&#xe639;</string>
+    <string name="if_favorite1">&#xe620;</string>
+</resources>
