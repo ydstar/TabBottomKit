@@ -1,5 +1,6 @@
 package com.example.tabbottomkit.demo1
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tabbottomkit.R
@@ -10,6 +11,7 @@ import com.tab.bottom.kit.ITabBottomLayout
 import com.tab.bottom.kit.ITabLayout
 import com.tab.bottom.kit.tab.IFragmentTabView
 import com.tab.bottom.kit.tab.ITabViewAdapter
+import com.tab.bottom.kit.util.IDisplayUtil
 import java.util.*
 
 class Demo1Activity : AppCompatActivity() {
@@ -53,6 +55,11 @@ class Demo1Activity : AppCompatActivity() {
 
         //设置默认选中的tab,只要这个方法被调用,上面的监听tab的onTabSelectedChange()方法就会调用,就会设置当前的fragment
         mTabBottomLayout!!.defaultSelected(infoList[mCurrentItemIndex])
+
+
+        // 改变某个tab的高度
+        val tabBottom = mTabBottomLayout?.findTab(infoList[2])
+        tabBottom?.apply { resetHeight(IDisplayUtil.dp2px(100f, resources)) }
     }
 
     /**
@@ -91,14 +98,26 @@ class Demo1Activity : AppCompatActivity() {
             tintColor
         )
         infoFavorite.mFragment = FavoriteFragment::class.java
+//        val infoCategory = ITabBottomInfo(
+//            "分类",
+//            "fonts/iconfont.ttf",
+//            getString(R.string.if_category),
+//            null,
+//            defaultColor,
+//            tintColor
+//        )
+        val bitmap = BitmapFactory.decodeResource(resources,
+            R.drawable.fire, null)
+        val bitmap2 = BitmapFactory.decodeResource(resources,
+            R.drawable.fire2, null)
         val infoCategory = ITabBottomInfo(
-            "分类",
-            "fonts/iconfont.ttf",
-            getString(R.string.if_category),
-            null,
+            "",
+            bitmap,
+            bitmap2,
             defaultColor,
             tintColor
         )
+
         infoCategory.mFragment = CategoryFragment::class.java
         val infoRecommend = ITabBottomInfo(
             "推荐",
@@ -123,6 +142,7 @@ class Demo1Activity : AppCompatActivity() {
         infoList.add(infoCategory)
         infoList.add(infoRecommend)
         infoList.add(infoProfile)
+
         return infoList
     }
 }
