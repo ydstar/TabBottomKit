@@ -14,7 +14,7 @@ dependencies {
 ```
 
 ## 使用方法
-#### 关于矢量图标的制作和使用,可以参考[Android_矢量字体图标文件并使用](https://www.jianshu.com/p/432d3b23384c)
+#### 关于矢量图标的制作和使用,可以参考[矢量字体图标制作并使用](https://www.jianshu.com/p/432d3b23384c)
 #### 1.在XML布局文件中添加ITabBottomLayout包裹IFragmentTabView
 ```java
 <?xml version="1.0" encoding="utf-8"?>
