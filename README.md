@@ -14,7 +14,7 @@ dependencies {
 ```
 
 ## 使用方法
-
+#### 关于矢量图标的制作和使用,可以参考[Android_矢量字体图标文件并使用](https://www.jianshu.com/p/432d3b23384c)
 #### 1.在XML布局文件中添加ITabBottomLayout包裹IFragmentTabView
 ```java
 <?xml version="1.0" encoding="utf-8"?>
@@ -32,10 +32,10 @@ dependencies {
 ```
 
 #### 2.在 Activity中添加代码
-初始化底部的Tab和中间的fragment
+初始化底部的Tab和内容区域的fragment
 ```java
 
-    private fun initBottomTab() {
+    private fun initBottomTabAndFragment() {
         mTabBottomLayout!!.setTabAlpha(0.55f)
         //获取tab数据
         val infoList = getFragmentInfoList()
