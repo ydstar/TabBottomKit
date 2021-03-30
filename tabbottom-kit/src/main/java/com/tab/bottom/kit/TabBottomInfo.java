@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
  * Email: hydznsqk@163.com
  * Des:
  */
-public class ITabBottomInfo<Color> {
+public class TabBottomInfo<Color> {
 
     public enum TabType{
         BITMAP,ICON
@@ -33,11 +33,11 @@ public class ITabBottomInfo<Color> {
 
     public TabType mTabType;
 
-    public ITabBottomInfo(String name,
-                          Bitmap defaultBitmap,
-                          Bitmap selectedBitmap,
-                          Color defaultColor,
-                          Color tintColor) {
+    public TabBottomInfo(String name,
+                         Bitmap defaultBitmap,
+                         Bitmap selectedBitmap,
+                         Color defaultColor,
+                         Color tintColor) {
         this.mName = name;
         this.mDefaultBitmap = defaultBitmap;
         this.mSelectedBitmap = selectedBitmap;
@@ -46,12 +46,12 @@ public class ITabBottomInfo<Color> {
         this.mTabType = TabType.BITMAP;
     }
 
-    public ITabBottomInfo(String name,
-                          String iconFont,
-                          String defaultIconName,
-                          String selectedIconName,
-                          Color defaultColor,
-                          Color tintColor) {
+    public TabBottomInfo(String name,
+                         String iconFont,
+                         String defaultIconName,
+                         String selectedIconName,
+                         Color defaultColor,
+                         Color tintColor) {
         this.mName = name;
         this.mIconFont = iconFont;
         this.mDefaultIconName = defaultIconName;

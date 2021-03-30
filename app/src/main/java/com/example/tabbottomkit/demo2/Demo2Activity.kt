@@ -6,9 +6,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
 import com.example.tabbottomkit.R
-import com.tab.bottom.kit.ITabBottomInfo
-import com.tab.bottom.kit.ITabBottomLayout
-import com.tab.bottom.kit.util.IDisplayUtil
+import com.tab.bottom.kit.TabBottomInfo
+import com.tab.bottom.kit.TabBottomKitLayout
+import com.tab.bottom.kit.util.DisplayUtil
+
 import java.util.ArrayList
 
 class Demo2Activity : AppCompatActivity() {
@@ -20,20 +21,20 @@ class Demo2Activity : AppCompatActivity() {
     }
 
     private fun initTabBottom2() {
-        val hiTabBottomLayout: ITabBottomLayout = findViewById(R.id.itablayout)
+        val hiTabBottomLayout: TabBottomKitLayout = findViewById(R.id.itablayout)
         hiTabBottomLayout.setTabAlpha(0.85f)
 
         val defaultColor: Int = getResources().getColor(R.color.tabBottomDefaultColor)
         val tintColor: Int = getResources().getColor(R.color.tabBottomTintColor)
 
-        val bottomInfoList: MutableList<ITabBottomInfo<*>> = ArrayList()
+        val bottomInfoList: MutableList<TabBottomInfo<*>> = ArrayList()
 
         val bitmap = BitmapFactory.decodeResource(resources,
             R.drawable.fire, null)
         val bitmap2 = BitmapFactory.decodeResource(resources,
             R.drawable.fire2, null)
 
-        val homeInfo = ITabBottomInfo(
+        val homeInfo = TabBottomInfo(
             "首页",
             "fonts/iconfont.ttf",
             getString(R.string.if_home),
@@ -41,7 +42,7 @@ class Demo2Activity : AppCompatActivity() {
             defaultColor,
             tintColor
         )
-        val infoRecommend = ITabBottomInfo(
+        val infoRecommend = TabBottomInfo(
             "收藏",
             "fonts/iconfont.ttf",
             getString(R.string.if_favorite),
@@ -50,7 +51,7 @@ class Demo2Activity : AppCompatActivity() {
             tintColor
         )
 
-        val infoCategory = ITabBottomInfo(
+        val infoCategory = TabBottomInfo(
             "分类",
             bitmap,
             bitmap2,
@@ -58,7 +59,7 @@ class Demo2Activity : AppCompatActivity() {
             tintColor
         )
 
-        val infoChat = ITabBottomInfo(
+        val infoChat = TabBottomInfo(
             "推荐",
             "fonts/iconfont.ttf",
             getString(R.string.if_recommend),
@@ -67,7 +68,7 @@ class Demo2Activity : AppCompatActivity() {
             tintColor
         )
 
-        val infoProfile = ITabBottomInfo(
+        val infoProfile = TabBottomInfo(
             "我的",
             "fonts/iconfont.ttf",
             getString(R.string.if_profile),
@@ -88,7 +89,7 @@ class Demo2Activity : AppCompatActivity() {
             hiTabBottomLayout.defaultSelected(homeInfo)
             // 改变某个tab的高度
             val tabBottom = hiTabBottomLayout.findTab(bottomInfoList[1])
-            tabBottom?.apply { resetHeight(IDisplayUtil.dp2px(100f, resources)) }
+            tabBottom?.apply { resetHeight(DisplayUtil.dp2px(100f, resources)) }
         },2000)
 
         hiTabBottomLayout.addTabSelectedChangeListener { _, _, currentSelectInfo ->
@@ -99,6 +100,6 @@ class Demo2Activity : AppCompatActivity() {
 
         // 改变某个tab的高度
         val tabBottom = hiTabBottomLayout.findTab(bottomInfoList[2])
-        tabBottom?.apply { resetHeight(IDisplayUtil.dp2px(100f, resources)) }
+        tabBottom?.apply { resetHeight(DisplayUtil.dp2px(100f, resources)) }
     }
 }

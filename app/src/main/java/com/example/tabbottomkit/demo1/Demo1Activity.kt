@@ -5,19 +5,18 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tabbottomkit.R
 import com.example.tabbottomkit.fragment.*
+import com.tab.bottom.kit.*
 
-import com.tab.bottom.kit.ITabBottomInfo
-import com.tab.bottom.kit.ITabBottomLayout
-import com.tab.bottom.kit.ITabLayout
-import com.tab.bottom.kit.tab.IFragmentTabView
-import com.tab.bottom.kit.tab.ITabViewAdapter
-import com.tab.bottom.kit.util.IDisplayUtil
+import com.tab.bottom.kit.tab.FragmentTabView
+import com.tab.bottom.kit.tab.TabViewAdapter
+import com.tab.bottom.kit.util.DisplayUtil
+
 import java.util.*
 
 class Demo1Activity : AppCompatActivity() {
 
-    private var mFragmentTabView: IFragmentTabView? = null
-    private var mTabBottomLayout: ITabBottomLayout? = null
+    private var mFragmentTabView: FragmentTabView? = null
+    private var mTabBottomLayout: TabBottomKitLayout? = null
     private var mCurrentItemIndex = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +58,7 @@ class Demo1Activity : AppCompatActivity() {
 
         // 改变某个tab的高度
         val tabBottom = mTabBottomLayout?.findTab(infoList[2])
-        tabBottom?.apply { resetHeight(IDisplayUtil.dp2px(100f, resources)) }
+        tabBottom?.apply { resetHeight(DisplayUtil.dp2px(100f, resources)) }
     }
 
     /**
@@ -67,20 +66,20 @@ class Demo1Activity : AppCompatActivity() {
      *
      * @param infoList
      */
-    private fun initFragmentTabView(infoList: List<ITabBottomInfo<*>>) {
-        val adapter =ITabViewAdapter(getSupportFragmentManager(), infoList)
+    private fun initFragmentTabView(infoList: List<TabBottomInfo<*>>) {
+        val adapter = TabViewAdapter(getSupportFragmentManager(), infoList)
         mFragmentTabView!!.adapter = adapter
     }
 
     /**
      * 获取所有的Fragment所对应的底部Tab数据
      */
-    private fun getFragmentInfoList(): List<ITabBottomInfo<*>> {
-        val infoList: MutableList<ITabBottomInfo<*>> =
+    private fun getFragmentInfoList(): List<TabBottomInfo<*>> {
+        val infoList: MutableList<TabBottomInfo<*>> =
             ArrayList()
         val defaultColor: Int = getResources().getColor(R.color.tabBottomDefaultColor)
         val tintColor: Int = getResources().getColor(R.color.tabBottomTintColor)
-        val homeInfo = ITabBottomInfo(
+        val homeInfo = TabBottomInfo(
             "首页",
             "fonts/iconfont.ttf",
             getString(R.string.if_home),
@@ -89,7 +88,7 @@ class Demo1Activity : AppCompatActivity() {
             tintColor
         )
         homeInfo.mFragment = HomeFragment::class.java
-        val infoFavorite = ITabBottomInfo(
+        val infoFavorite = TabBottomInfo(
             "收藏",
             "fonts/iconfont.ttf",
             getString(R.string.if_favorite),
@@ -98,7 +97,7 @@ class Demo1Activity : AppCompatActivity() {
             tintColor
         )
         infoFavorite.mFragment = FavoriteFragment::class.java
-//        val infoCategory = ITabBottomInfo(
+//        val infoCategory = TabBottomInfo(
 //            "分类",
 //            "fonts/iconfont.ttf",
 //            getString(R.string.if_category),
@@ -110,7 +109,7 @@ class Demo1Activity : AppCompatActivity() {
             R.drawable.fire, null)
         val bitmap2 = BitmapFactory.decodeResource(resources,
             R.drawable.fire2, null)
-        val infoCategory = ITabBottomInfo(
+        val infoCategory = TabBottomInfo(
             "",
             bitmap,
             bitmap2,
@@ -119,7 +118,7 @@ class Demo1Activity : AppCompatActivity() {
         )
 
         infoCategory.mFragment = CategoryFragment::class.java
-        val infoRecommend = ITabBottomInfo(
+        val infoRecommend = TabBottomInfo(
             "推荐",
             "fonts/iconfont.ttf",
             getString(R.string.if_recommend),
@@ -128,7 +127,7 @@ class Demo1Activity : AppCompatActivity() {
             tintColor
         )
         infoRecommend.mFragment = RecommendFragment::class.java
-        val infoProfile = ITabBottomInfo(
+        val infoProfile = TabBottomInfo(
             "我的",
             "fonts/iconfont.ttf",
             getString(R.string.if_profile),

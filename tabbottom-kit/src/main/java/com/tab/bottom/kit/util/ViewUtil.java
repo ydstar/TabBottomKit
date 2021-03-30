@@ -22,7 +22,7 @@ import java.util.List;
  * Email: hydznsqk@163.com
  * Des:
  */
-public class IViewUtil {
+public class ViewUtil {
     /**
      * 获取指定类型的子View
      *

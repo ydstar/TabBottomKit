@@ -16,8 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.tab.bottom.kit.util.IDisplayUtil;
-import com.tab.bottom.kit.util.IViewUtil;
+import com.tab.bottom.kit.util.DisplayUtil;
+import com.tab.bottom.kit.util.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +41,8 @@ import java.util.List;
  *      9.添加底部导航的顶端的线条
  *      10.设置内容区域的底部Padding
  */
-public class ITabBottomLayout extends FrameLayout
-        implements ITabLayout<ITabBottom,ITabBottomInfo<?>> {
+public class TabBottomKitLayout extends FrameLayout
+        implements ITabLayout<TabBottom, TabBottomInfo<?>> {
 
     private static final String TAG_TAB_BOTTOM = "TAG_TAB_BOTTOM";
 
@@ -50,12 +50,12 @@ public class ITabBottomLayout extends FrameLayout
     private static final float TAB_BOTTOM_HEIGHT = 50;
 
     //传进来的所有tab的数据
-    private List<ITabBottomInfo<?>> mInfoList;
+    private List<TabBottomInfo<?>> mInfoList;
 
     //当前选中的tab的info
-    private ITabBottomInfo<?> mSelectInfo;
+    private TabBottomInfo<?> mSelectInfo;
 
-    private List<ITabBottom> mTabBottomList = new ArrayList<>();
+    private List<TabBottom> mTabBottomList = new ArrayList<>();
 
     private float mBottomAlpha = 1f;
 
@@ -65,16 +65,16 @@ public class ITabBottomLayout extends FrameLayout
     //TabBottom的头部线条颜色
     private String mBottomLineColor = "#dfe0e1";
 
-    private OnTabSelectedListener<ITabBottomInfo<?>> mListener;
-    public ITabBottomLayout(@NonNull Context context) {
+    private OnTabSelectedListener<TabBottomInfo<?>> mListener;
+    public TabBottomKitLayout(@NonNull Context context) {
         super(context);
     }
 
-    public ITabBottomLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public TabBottomKitLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public ITabBottomLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public TabBottomKitLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -82,7 +82,7 @@ public class ITabBottomLayout extends FrameLayout
      * 初始化所有的tab并填充数据
      */
     @Override
-    public void inflateInfo(@NonNull List<ITabBottomInfo<?>> infoList) {
+    public void inflateInfo(@NonNull List<TabBottomInfo<?>> infoList) {
         if(infoList.isEmpty()){
             return;
         }
@@ -98,21 +98,21 @@ public class ITabBottomLayout extends FrameLayout
         addBackground();
 
 
-        int height = IDisplayUtil.dp2px(TAB_BOTTOM_HEIGHT, getResources());
+        int height = DisplayUtil.dp2px(TAB_BOTTOM_HEIGHT, getResources());
         //屏幕的宽度 / tab的总数量 = 单个tab的宽度
-        int width = IDisplayUtil.getDisplayWidthInPx(getContext()) / infoList.size();
+        int width = DisplayUtil.getDisplayWidthInPx(getContext()) / infoList.size();
         FrameLayout tabContainer = new FrameLayout(getContext());
         tabContainer.setTag(TAG_TAB_BOTTOM);
 
         for(int x=0;x<infoList.size();x++){
-            final ITabBottomInfo<?> info = infoList.get(x);
+            final TabBottomInfo<?> info = infoList.get(x);
             //Tips：为何不用LinearLayout：当动态改变child大小后Gravity.BOTTOM会失效
             LayoutParams params = new LayoutParams(width, height);
             params.gravity = Gravity.BOTTOM;
             params.leftMargin = x * width;
 
             //每个tabBottom 对应一个 listener
-            ITabBottom tabBottom = new ITabBottom(getContext());
+            TabBottom tabBottom = new TabBottom(getContext());
             mTabBottomList.add(tabBottom);
             tabBottom.setTabInfo(info);
 
@@ -138,7 +138,7 @@ public class ITabBottomLayout extends FrameLayout
      */
     private void addBackground() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.i_bottom_layout_bg, null);
-        LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, IDisplayUtil.dp2px(TAB_BOTTOM_HEIGHT, getResources()));
+        LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DisplayUtil.dp2px(TAB_BOTTOM_HEIGHT, getResources()));
         params.gravity = Gravity.BOTTOM;
         addView(view, params);
         view.setAlpha(mBottomAlpha);
@@ -152,9 +152,9 @@ public class ITabBottomLayout extends FrameLayout
         bottomLine.setBackgroundColor(Color.parseColor(mBottomLineColor));
 
         LayoutParams bottomLineParams =
-                new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, IDisplayUtil.dp2px(mBottomLineHeight, getResources()));
+                new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DisplayUtil.dp2px(mBottomLineHeight, getResources()));
         bottomLineParams.gravity = Gravity.BOTTOM;
-        bottomLineParams.bottomMargin = IDisplayUtil.dp2px(TAB_BOTTOM_HEIGHT - mBottomLineHeight, getResources());
+        bottomLineParams.bottomMargin = DisplayUtil.dp2px(TAB_BOTTOM_HEIGHT - mBottomLineHeight, getResources());
         addView(bottomLine, bottomLineParams);
         bottomLine.setAlpha(mBottomAlpha);
     }
@@ -167,15 +167,15 @@ public class ITabBottomLayout extends FrameLayout
             return;
         }
         ViewGroup rootView = (ViewGroup) getChildAt(0);
-        ViewGroup targetView = IViewUtil.findTypeView(rootView, RecyclerView.class);
+        ViewGroup targetView = ViewUtil.findTypeView(rootView, RecyclerView.class);
         if (targetView == null) {
-            targetView = IViewUtil.findTypeView(rootView, ScrollView.class);
+            targetView = ViewUtil.findTypeView(rootView, ScrollView.class);
         }
         if (targetView == null) {
-            targetView = IViewUtil.findTypeView(rootView, AbsListView.class);
+            targetView = ViewUtil.findTypeView(rootView, AbsListView.class);
         }
         if (targetView != null) {
-            targetView.setPadding(0, 0, 0, IDisplayUtil.dp2px(TAB_BOTTOM_HEIGHT, getResources()));
+            targetView.setPadding(0, 0, 0, DisplayUtil.dp2px(TAB_BOTTOM_HEIGHT, getResources()));
             targetView.setClipToPadding(false);
         }
     }
@@ -185,8 +185,8 @@ public class ITabBottomLayout extends FrameLayout
      * 选中指定的tab,并重置其他的tab的UI样式
      * @param nextInfo
      */
-    private void onSelected(@NonNull ITabBottomInfo<?> nextInfo) {
-        for (ITabBottom tabBottom : mTabBottomList) {
+    private void onSelected(@NonNull TabBottomInfo<?> nextInfo) {
+        for (TabBottom tabBottom : mTabBottomList) {
             //当前选择的tab索引  上一个选择的tab ,这次选择的tab
             tabBottom.changeSelectTabAndResetOtherTab(mInfoList.indexOf(nextInfo), mSelectInfo, nextInfo);
         }
@@ -203,12 +203,12 @@ public class ITabBottomLayout extends FrameLayout
      * @return
      */
     @Override
-    public ITabBottom findTab(@NonNull ITabBottomInfo<?> info) {
+    public TabBottom findTab(@NonNull TabBottomInfo<?> info) {
         ViewGroup ll = findViewWithTag(TAG_TAB_BOTTOM);
         for (int i = 0; i < ll.getChildCount(); i++) {
             View child = ll.getChildAt(i);
-            if (child instanceof ITabBottom) {
-                ITabBottom tab = (ITabBottom) child;
+            if (child instanceof TabBottom) {
+                TabBottom tab = (TabBottom) child;
                 if (tab.getTabInfo() == info) {
                     return tab;
                 }
@@ -222,12 +222,12 @@ public class ITabBottomLayout extends FrameLayout
      * @param defaultInfo
      */
     @Override
-    public void defaultSelected(@NonNull ITabBottomInfo<?> defaultInfo) {
+    public void defaultSelected(@NonNull TabBottomInfo<?> defaultInfo) {
         onSelected(defaultInfo);
     }
 
     @Override
-    public void addTabSelectedChangeListener(OnTabSelectedListener<ITabBottomInfo<?>> listener) {
+    public void addTabSelectedChangeListener(OnTabSelectedListener<TabBottomInfo<?>> listener) {
         mListener = listener;
     }
 
@@ -246,8 +246,25 @@ public class ITabBottomLayout extends FrameLayout
      */
     public static void clipBottomPadding(ViewGroup targetView) {
         if (targetView != null) {
-            targetView.setPadding(0, 0, 0, IDisplayUtil.dp2px(TAB_BOTTOM_HEIGHT));
+            targetView.setPadding(0, 0, 0, DisplayUtil.dp2px(TAB_BOTTOM_HEIGHT));
             targetView.setClipToPadding(false);
+        }
+    }
+
+    /**
+     * 适配折叠屏,重新计算宽高
+     */
+    public void resizeITabBottomLayout(){
+        int width = DisplayUtil.getDisplayWidthInPx(getContext()) / mInfoList.size();
+        ViewGroup frameLayout = (ViewGroup) getChildAt(getChildCount() - 1);
+        int childCount = frameLayout.getChildCount();
+        for(int i=0;i<childCount;i++){
+            View button = frameLayout.getChildAt(i);
+            FrameLayout.LayoutParams params = (LayoutParams) button.getLayoutParams();
+
+            params.width=width;
+            params.leftMargin=i*width;
+            button.setLayoutParams(params);
         }
     }
 }

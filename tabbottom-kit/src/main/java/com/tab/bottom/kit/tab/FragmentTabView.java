@@ -14,20 +14,20 @@ import androidx.fragment.app.Fragment;
  * Email: hydznsqk@163.com
  * Des: 存放Fragment的容器,和底部Tab配合使用
  */
-public class IFragmentTabView extends FrameLayout {
+public class FragmentTabView extends FrameLayout {
 
-    private ITabViewAdapter mAdapter;
+    private TabViewAdapter mAdapter;
     private int mCurrentPosition;
 
-    public IFragmentTabView(@NonNull Context context) {
+    public FragmentTabView(@NonNull Context context) {
         this(context,null);
     }
 
-    public IFragmentTabView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public FragmentTabView(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs,0);
     }
 
-    public IFragmentTabView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public FragmentTabView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -35,7 +35,7 @@ public class IFragmentTabView extends FrameLayout {
      * 设置adapter
      * @param adapter
      */
-    public void setAdapter(ITabViewAdapter adapter){
+    public void setAdapter(TabViewAdapter adapter){
         if(mAdapter!=null || adapter==null){
             return;
         }
@@ -57,7 +57,7 @@ public class IFragmentTabView extends FrameLayout {
         }
     }
 
-    public ITabViewAdapter getAdapter() {
+    public TabViewAdapter getAdapter() {
         return mAdapter;
     }
 

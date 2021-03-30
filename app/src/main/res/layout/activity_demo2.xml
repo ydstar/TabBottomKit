@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.tab.bottom.kit.ITabBottomLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.tab.bottom.kit.TabBottomKitLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/itablayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -87,4 +87,4 @@
         </LinearLayout>
 
     </ScrollView>
-</com.tab.bottom.kit.ITabBottomLayout>
+</com.tab.bottom.kit.TabBottomKitLayout>

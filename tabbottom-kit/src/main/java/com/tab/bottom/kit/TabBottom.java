@@ -22,24 +22,24 @@ import androidx.annotation.NonNull;
  * Email: hydznsqk@163.com
  * Des: 单个的底部Tab条目
  */
-public class ITabBottom extends RelativeLayout implements ITab<ITabBottomInfo<?>> {
+public class TabBottom extends RelativeLayout implements ITab<TabBottomInfo<?>> {
 
 
     private ImageView mTabImageView;
     private TextView mTabIconView;
     private TextView mTabNameView;
 
-    private ITabBottomInfo<?> mTabInfo;
+    private TabBottomInfo<?> mTabInfo;
 
-    public ITabBottom(Context context) {
+    public TabBottom(Context context) {
         this(context, null);
     }
 
-    public ITabBottom(Context context, AttributeSet attrs) {
+    public TabBottom(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ITabBottom(Context context, AttributeSet attrs, int defStyleAttr) {
+    public TabBottom(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -56,7 +56,7 @@ public class ITabBottom extends RelativeLayout implements ITab<ITabBottomInfo<?>
      * @param iTabBottomInfo
      */
     @Override
-    public void setTabInfo(@NonNull ITabBottomInfo<?> iTabBottomInfo) {
+    public void setTabInfo(@NonNull TabBottomInfo<?> iTabBottomInfo) {
         this.mTabInfo = iTabBottomInfo;
         inflateInfo(false,true);
     }
@@ -67,7 +67,7 @@ public class ITabBottom extends RelativeLayout implements ITab<ITabBottomInfo<?>
      * @param init 是否是初始化
      */
     private void inflateInfo(boolean selected, boolean init) {
-        if (mTabInfo.mTabType == ITabBottomInfo.TabType.ICON) {
+        if (mTabInfo.mTabType == TabBottomInfo.TabType.ICON) {
             if (init) {
                 //隐藏mTabImageView 显示 mTabIconView
                 mTabImageView.setVisibility(GONE);
@@ -89,7 +89,7 @@ public class ITabBottom extends RelativeLayout implements ITab<ITabBottomInfo<?>
                 mTabNameView.setTextColor(getTextColor(mTabInfo.mDefaultColor));
             }
 
-        } else if (mTabInfo.mTabType == ITabBottomInfo.TabType.BITMAP) {
+        } else if (mTabInfo.mTabType == TabBottomInfo.TabType.BITMAP) {
             if (init) {
                 //隐藏mTabIconView 显示 mTabImageView
                 mTabImageView.setVisibility(VISIBLE);
@@ -132,7 +132,7 @@ public class ITabBottom extends RelativeLayout implements ITab<ITabBottomInfo<?>
      * @param prevInfo
      * @param currentSelectInfo
      */
-    public void changeSelectTabAndResetOtherTab(int index, ITabBottomInfo<?> prevInfo, ITabBottomInfo<?> currentSelectInfo) {
+    public void changeSelectTabAndResetOtherTab(int index, TabBottomInfo<?> prevInfo, TabBottomInfo<?> currentSelectInfo) {
         // 默认情况下        tabInfo =首页    prevInfo = null   currentSelectInfo=首页
         // 这个时候点击了推荐  tabInfo =推荐   prevInfo = 首页    currentSelectInfo=推荐
         if(prevInfo !=mTabInfo && currentSelectInfo!=mTabInfo){
@@ -150,7 +150,7 @@ public class ITabBottom extends RelativeLayout implements ITab<ITabBottomInfo<?>
 
     }
 
-    public ITabBottomInfo<?> getTabInfo() {
+    public TabBottomInfo<?> getTabInfo() {
         return mTabInfo;
     }
 }

@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.tab.bottom.kit.ITabBottomInfo;
+import com.tab.bottom.kit.TabBottomInfo;
 
 import java.util.List;
 
@@ -16,13 +16,13 @@ import java.util.List;
  * Email: hydznsqk@163.com
  * Des: 用于创建Fragment和切换Fragment
  */
-public class ITabViewAdapter {
+public class TabViewAdapter {
 
     private FragmentManager mFragmentManager;
-    private List<ITabBottomInfo<?>> mInfoList;
+    private List<TabBottomInfo<?>> mInfoList;
     private Fragment mCurrentFragment;
 
-    public ITabViewAdapter(FragmentManager fragmentManager, List<ITabBottomInfo<?>> infoList) {
+    public TabViewAdapter(FragmentManager fragmentManager, List<TabBottomInfo<?>> infoList) {
         this.mFragmentManager = fragmentManager;
         this.mInfoList = infoList;
     }
