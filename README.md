@@ -22,7 +22,7 @@ YdKit 是一组功能丰富的 Android 通用组件。
 仅支持`AndroidX`
 ```
 dependencies {
-     implementation 'com.android.ydkit:tabbottom-kit:1.0.0'
+     implementation 'com.android.ydkit:tabbottom-kit:1.0.1'
 }
 ```
 
@@ -31,17 +31,17 @@ dependencies {
 #### 1.在XML布局文件中添加ITabBottomLayout包裹IFragmentTabView
 ```java
 <?xml version="1.0" encoding="utf-8"?>
-<com.tab.bottom.kit.ITabBottomLayout
+<com.tab.bottom.kit.TabBottomKitLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tab_bottom_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.tab.bottom.kit.tab.IFragmentTabView
+    <com.tab.bottom.kit.tab.FragmentTabView
         android:id="@+id/fragment_tab_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-</com.tab.bottom.kit.ITabBottomLayout>
+</com.tab.bottom.kit.TabBottomKitLayout>
 ```
 
 #### 2.在 Activity中添加代码
@@ -76,75 +76,74 @@ dependencies {
 
 初始化底部的Tab
 ```java
-    private fun getFragmentInfoList(): List<ITabBottomInfo<*>> {
-        val infoList: MutableList<ITabBottomInfo<*>> =
-            ArrayList()
-        val defaultColor: Int = getResources().getColor(R.color.tabBottomDefaultColor)
-        val tintColor: Int = getResources().getColor(R.color.tabBottomTintColor)
-        val homeInfo = ITabBottomInfo(
-            "首页",
-            "fonts/iconfont.ttf",
-            getString(R.string.if_home),
-            null,
-            defaultColor,
-            tintColor
-        )
-        homeInfo.mFragment = HomeFragment::class.java
-        val infoFavorite = ITabBottomInfo(
-            "收藏",
-            "fonts/iconfont.ttf",
-            getString(R.string.if_favorite),
-            null,
-            defaultColor,
-            tintColor
-        )
-        infoFavorite.mFragment = FavoriteFragment::class.java
+       private fun getFragmentInfoList(): List<TabBottomInfo<*>> {
+           val infoList: MutableList<TabBottomInfo<*>> =
+               ArrayList()
+           val defaultColor: Int = getResources().getColor(R.color.tabBottomDefaultColor)
+           val tintColor: Int = getResources().getColor(R.color.tabBottomTintColor)
+           val homeInfo = TabBottomInfo(
+               "首页",
+               "fonts/iconfont.ttf",
+               getString(R.string.if_home),
+               null,
+               defaultColor,
+               tintColor
+           )
+           homeInfo.mFragment = HomeFragment::class.java
+           val infoFavorite = TabBottomInfo(
+               "收藏",
+               "fonts/iconfont.ttf",
+               getString(R.string.if_favorite),
+               null,
+               defaultColor,
+               tintColor
+           )
+           infoFavorite.mFragment = FavoriteFragment::class.java
+           val bitmap = BitmapFactory.decodeResource(resources,
+               R.drawable.fire, null)
+           val bitmap2 = BitmapFactory.decodeResource(resources,
+               R.drawable.fire2, null)
+           val infoCategory = TabBottomInfo(
+               "",
+               bitmap,
+               bitmap2,
+               defaultColor,
+               tintColor
+           )
 
-        val bitmap = BitmapFactory.decodeResource(resources,
-            R.drawable.fire, null)
-        val bitmap2 = BitmapFactory.decodeResource(resources,
-            R.drawable.fire2, null)
-        val infoCategory = ITabBottomInfo(
-            "",
-            bitmap,
-            bitmap2,
-            defaultColor,
-            tintColor
-        )
+           infoCategory.mFragment = CategoryFragment::class.java
+           val infoRecommend = TabBottomInfo(
+               "推荐",
+               "fonts/iconfont.ttf",
+               getString(R.string.if_recommend),
+               null,
+               defaultColor,
+               tintColor
+           )
+           infoRecommend.mFragment = RecommendFragment::class.java
+           val infoProfile = TabBottomInfo(
+               "我的",
+               "fonts/iconfont.ttf",
+               getString(R.string.if_profile),
+               null,
+               defaultColor,
+               tintColor
+           )
+           infoProfile.mFragment = ProfileFragment::class.java
+           infoList.add(homeInfo)
+           infoList.add(infoFavorite)
+           infoList.add(infoCategory)
+           infoList.add(infoRecommend)
+           infoList.add(infoProfile)
 
-        infoCategory.mFragment = CategoryFragment::class.java
-        val infoRecommend = ITabBottomInfo(
-            "推荐",
-            "fonts/iconfont.ttf",
-            getString(R.string.if_recommend),
-            null,
-            defaultColor,
-            tintColor
-        )
-        infoRecommend.mFragment = RecommendFragment::class.java
-        val infoProfile = ITabBottomInfo(
-            "我的",
-            "fonts/iconfont.ttf",
-            getString(R.string.if_profile),
-            null,
-            defaultColor,
-            tintColor
-        )
-        infoProfile.mFragment = ProfileFragment::class.java
-        infoList.add(homeInfo)
-        infoList.add(infoFavorite)
-        infoList.add(infoCategory)
-        infoList.add(infoRecommend)
-        infoList.add(infoProfile)
-
-        return infoList
-    }
+           return infoList
+       }
 ```
 
 初始化fragment
 ```
-    private fun initFragmentTabView(infoList: List<ITabBottomInfo<*>>) {
-        val adapter =ITabViewAdapter(getSupportFragmentManager(), infoList)
+    private fun initFragmentTabView(infoList: List<TabBottomInfo<*>>) {
+        val adapter =TabViewAdapter(getSupportFragmentManager(), infoList)
         mFragmentTabView!!.adapter = adapter
     }
 ```
